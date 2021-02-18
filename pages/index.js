@@ -11,8 +11,8 @@ import { connectToDatabase } from "../util/mongodb";
 export default function Home({data}) {
   const dataServices =[{titule:"Furniture Installation",img:"images/slide_2.jpg",content: "When the need for restructuring arrives, call us. We are here to get your project off the drawing board! We have a great experience in installation and managing office and home projects. We are ready to assembly several kinds of furniture seeking safety and low costs for our customers."},
                 {titule:"General Residential Services", img:"images/slide_3.jpg", content:"All houses need some adjustments over time. We can help you with a worn down door lock, a broken door handle, a hinge without some screws, a garden to clean and a lot of other types of home maintenances. Call and tell us about your necessities."}]
-  const dataComment = [{description:"Software Engenier", local:"London - UK",titule:"Weslley Oliveira",img:"images/slide_2.jpg",content: "When the need for restructuring arrives, call us. We are here to get your project off the drawing board! We have a great experience in installation and managing office and home projects."},
-  {description:"Princess", local:"London - UK", titule:"Amanda Rossini", img:"images/slide_3.jpg", content:"All houses need some adjustments over time. We can help you with a worn down door lock, a broken door handle, a hinge without some screws, a garden to clean and a lot of other types of home maintenances."}]
+  const dataComment = [{description:"Software Engenier", local:"London - UK",titule:"Olinda Nova",img:"http://www.fotos-imagens.net/wp-content/uploads/2011/11/Rosto-modelo.jpg",content: "When the need for restructuring arrives, call us. We are here to get your project off the drawing board! We have a great experience in installation and managing office and home projects."},
+  {description:"Princess", local:"London - UK", titule:"Joao Outro", img:"https://cdn.mundodastribos.com/2012/11/541316-Cortes-de-cabelo-para-rosto-redondo-masculino.1.jpg", content:"All houses need some adjustments over time. We can help you with a worn down door lock, a broken door handle, a hinge without some screws, a garden to clean and a lot of other types of home maintenances."}]
 
   return (<>
      <Layout>       
@@ -25,11 +25,11 @@ export default function Home({data}) {
         <CardServices data={dataServices}/>
 
         <div className="bg-blue-50 py-8">
-        <TituleComponent titule="We provide the" tituleSpan="best services" subTitule="Our Services"/>
+        <TituleComponent titule="Recent" tituleSpan="Projects" subTitule="Our Portfolio"/>
 
         <CardProject data={data}/>
         </div>
-        <TituleComponent titule="We provide the" tituleSpan="best services" subTitule="Our Services"/>
+        <TituleComponent titule="Depoiments" tituleSpan="" subTitule="Our costumers"/>
 
         <CardComments data={dataComment}/>
 

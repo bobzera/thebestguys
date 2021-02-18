@@ -66,7 +66,7 @@ export default function Admin({data}){
         <Link href={`/portfolio/${titule}`}>
                 <div className="py-2 flex items-center" key={titule}>
                 
-                    <img className="rounded w-14 h-14" src={`/uploads/${img}`}/>
+                    <img className="rounded w-14 h-14" src={`${img}`}/>
                 
                 <div className="p-2">
                     <h1 className="font-bold">{titule}</h1>

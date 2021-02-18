@@ -153,11 +153,15 @@ export default function job({data}){
               </div>
 
               <div  className="col-span-6 sm:col-span-3 lg:col-span-2">
-                <Upload  nameImag={nameImg} setImage={setImage}/>
+                {/* <Upload  nameImag={nameImg} setImage={setImage}/> */}
+                <label for="postal_code" className="block text-sm font-medium text-gray-700">Imagem</label>
+                <input placeholder="URL da imagem" value={nameImg} onChange={e => setImage(e.target.value)} type="text" name="postal_code" id="postal_code" autocomplete="phone" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"/>
+              
+
                 {nameImg && <div className="mt-2 rounded border-2">
                 <div className="p-2 font-semibold">Preview:</div>
                 
-                <img className="p-2 rounded w-48" src={`/uploads/${nameImg}`}/>
+                <img className="p-2 rounded w-48" src={`${nameImg}`}/>
                 </div>}
             </div>
 
