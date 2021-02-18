@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import '@uppy/core/dist/style.css';
+@import '@uppy/drag-drop/dist/style.css';
+
+
+@import "react-slideshow-image/dist/styles.css";
+
+@media (max-width: 640px) {                  
+    .content-to-hide {
+       display: none;
+    }
+ }
+
+ .each-slide > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    height: 650px;
+    z-index: 0;
+  }
+  

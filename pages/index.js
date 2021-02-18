@@ -1,82 +1,59 @@
-import Head from 'next/head'
+import InfoCard from '../components/infoCard'
+import CardServices from '../components/cardServices'
+import Layout from '../components/layout'
+import Slide from '../components/slide'
+import TituleComponent from '../components/tituleComponent'
+import CardProject from '../components/cardProject'
+import CardComments from '../components/cardComments'
 
-export default function Home() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+import { connectToDatabase } from "../util/mongodb";
 
-      <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+export default function Home({data}) {
+  const dataServices =[{titule:"Furniture Installation",img:"images/slide_2.jpg",content: "When the need for restructuring arrives, call us. We are here to get your project off the drawing board! We have a great experience in installation and managing office and home projects. We are ready to assembly several kinds of furniture seeking safety and low costs for our customers."},
+                {titule:"General Residential Services", img:"images/slide_3.jpg", content:"All houses need some adjustments over time. We can help you with a worn down door lock, a broken door handle, a hinge without some screws, a garden to clean and a lot of other types of home maintenances. Call and tell us about your necessities."}]
+  const dataComment = [{description:"Software Engenier", local:"London - UK",titule:"Weslley Oliveira",img:"images/slide_2.jpg",content: "When the need for restructuring arrives, call us. We are here to get your project off the drawing board! We have a great experience in installation and managing office and home projects."},
+  {description:"Princess", local:"London - UK", titule:"Amanda Rossini", img:"images/slide_3.jpg", content:"All houses need some adjustments over time. We can help you with a worn down door lock, a broken door handle, a hinge without some screws, a garden to clean and a lot of other types of home maintenances."}]
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
+  return (<>
+     <Layout>       
+        <Slide data={dataServices}/>
+        
+        <InfoCard/>
 
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
+        <TituleComponent titule="We provide the" tituleSpan="best services" subTitule="Our Services"/>
 
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+        <CardServices data={dataServices}/>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
+        <div className="bg-blue-50 py-8">
+        <TituleComponent titule="We provide the" tituleSpan="best services" subTitule="Our Services"/>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <CardProject data={data}/>
         </div>
-      </main>
+        <TituleComponent titule="We provide the" tituleSpan="best services" subTitule="Our Services"/>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
-    </div>
-  )
+        <CardComments data={dataComment}/>
+
+     </Layout>
+  </>)
 }
+
+
+
+
+export async function getServerSideProps() {
+
+   const { db } = await connectToDatabase();  
+ 
+   const response = await db
+     .collection("jobs")
+     .find({})
+     .limit(3)
+     .sort({ metacritic: -1 })
+     .toArray();
+ 
+   return {
+     props: {
+       data: JSON.parse(JSON.stringify(response)),
+     },
+   };
+ }
